@@ -202,6 +202,7 @@ function ballHitPaddle (_ball, _paddle) {
     }
 
 }*/
+var conteur = 0;
 var main = {
   //Chargement des images
 	preload: function() {
@@ -215,18 +216,20 @@ var main = {
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
     this.cursor = game.input.keyboard.createCursorKeys()
+		//Bouton Start Stop
+		//button = game.add.button(game.world.centerX - 95, 400, 'button', actionOnClick, this, 2, 1, 0);
     //Raquette
-    this.paddle = game.add.sprite(200, 450, 'paddle');
+    this.paddle = game.add.sprite(287.5, 450, 'paddle');
 		game.physics.arcade.enable(this.paddle);
 		this.paddle.body.collideWorldBounds = true;
 		this.paddle.body.immovable = true;
     //Balle
-    this.ball = game.add.sprite(200, 300, 'ball');
+    this.ball = game.add.sprite(287.5, 300, 'ball');
     game.physics.arcade.enable(this.ball);
     game.physics.arcade.checkCollision.down = false;
     this.ball.body.collideWorldBounds = true;
-    this.ball.body.velocity.x = 200; this.ball.body.velocity.y = 200;
-    this.ball.body.bounce.x = 1; this.ball.body.bounce.y = 1;
+    this.ball.body.velocity.x = (Math.random()*401)-200; this.ball.body.velocity.y = 200;
+    this.ball.body.bounce.x = 1.01; this.ball.body.bounce.y = 1.01;
     //Brique type 1
     this.bricks = game.add.group();
     this.bricks.enableBody = true;
@@ -235,35 +238,78 @@ var main = {
         game.add.sprite(55+i*60, 55+j*35, 'brik', 0, this.bricks);
     this.bricks.setAll('body.immovable', true);
     //Brique type 2
-    /*this.bricks = game.add.group();
-    this.bricks.enableBody = true;
+    this.bricks2 = game.add.group();
+    this.bricks2.enableBody = true;
     for (var i = 0; i < 8; i++)
       for (var j = 0; j < 1; j++)
-        game.add.sprite(55+i*60, 225+j*35, 'brik2', 0, this.bricks);
-    this.bricks.setAll('body.immovable', true);*/
+        game.add.sprite(55+i*60, 225+j*35, 'brik2', 0, this.bricks2);
+    this.bricks2.setAll('body.immovable', true);
   },
 
   update: function() {
     //Gestion des collisions
-    game.physics.arcade.collide(this.paddle, this.ball);
+    game.physics.arcade.collide(this.paddle, this.ball, this.hitPaddle, null, this);
     game.physics.arcade.collide(this.ball, this.bricks, this.hit, null, this);
+    game.physics.arcade.collide(this.ball, this.bricks2, this.hit2, null, this);
     //Déplacement de la raquette
     if (this.cursor.right.isDown)
-      this.paddle.body.velocity.x = 350;
+      this.paddle.body.velocity.x = 600;
     else if (this.cursor.left.isDown)
-      this.paddle.body.velocity.x = -350;
+      this.paddle.body.velocity.x = -600;
     else
       this.paddle.body.velocity.x = 0;
     //Fin du jeu
     if (this.ball.y>450)
-      {introText = game.add.text(200, 2, 'Game Over!', { font: "40px Arial", fill: "#ffffff"});};
+      {
+        introText = game.add.text(200, 2, 'Game Over!', {
+           font: "40px Arial", fill: "#ffffff"
+         });
+       };
     },
 
     hit: function(ball, brik) {
-		brik.kill();
-	}
+    if ((this.bricks.length == 0 && this.bricks2.length == 1)||(this.bricks.length == 1 && this.bricks2.length == 0))
+    {
+      introText = game.add.text(200, 2, 'You Win!', {
+         font: "40px Arial", fill: "#ffffff"
+       });
+       this.ball.body.velocity.x = 0; this.ball.body.velocity.y = 0;
+       this.ball.body.bounce.x = 0; this.ball.body.bounce.y = 0;
+    }else{
+		   brik.destroy();
+    }
+	},
+    hit2: function(ball, brik) {
+    if ((this.bricks.length == 0 && this.bricks2.length == 1)||(this.bricks.length == 1 && this.bricks2.length == 0))
+    {
+      introText = game.add.text(200, 2, 'You Win!', {
+         font: "40px Arial", fill: "#ffffff"
+       });
+       this.ball.body.velocity.x = 0; this.ball.body.velocity.y = 0;
+       this.ball.body.bounce.x = 0; this.ball.body.bounce.y = 0;
+    }else{
+       conteur ++;
+       if(conteur == 2){
+         brik.destroy();
+         conteur = 0;
+       }
+    }
+  },
+		hitPaddle: function(ball, paddle) {
+			var posBallPad = paddle.world.x-ball.world.x;
+			//console.log(posBallPad);
+			if(posBallPad >-15 && posBallPad <5)
+			{
+				this.ball.body.velocity.x = this.ball.body.velocity.y;
+
+			}else if(posBallPad >45 && posBallPad <65)
+			{
+				this.ball.body.velocity.x -= this.ball.body.velocity.y;
+			}
+
+		},
 };
 
-var game = new Phaser.Game(600, 500, Phaser.AUTO, 'gameDiv');
+var game = new Phaser.Game(575, 500, Phaser.AUTO, 'gameDiv');
 game.state.add('main', main);
 game.state.start('main');

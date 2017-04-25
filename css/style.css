@@ -1,0 +1,34 @@
+.conteneur{
+  display: flex;
+  justify-content: center;
+}
+#gameDiv{
+  border-radius: 1px;
+  border: 1px solid white;
+  box-shadow: 5px 5px 5px black;
+}
+@font-face {
+  font-family: font;
+  src: url('Reboot Crush.ttf');
+}
+#Titre{
+  text-align: center;
+  font-family: font;
+  color: rgb(255, 0, 0);
+  text-shadow: 5px 5px 5px black;
+}
+#start{
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px black;
+}
+body{
+  background-image: url('background.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.game-screen canvas {
+    margin: 0 auto;
+}
