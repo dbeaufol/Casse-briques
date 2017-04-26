@@ -2,6 +2,11 @@
   display: flex;
   justify-content: center;
 }
+#conteneur{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 #gameDiv{
   border-radius: 1px;
   border: 1px solid white;
@@ -11,7 +16,7 @@
   font-family: font;
   src: url('Reboot Crush.ttf');
 }
-#Titre{
+.Titre{
   text-align: center;
   font-family: font;
   color: rgb(255, 0, 0);
@@ -23,6 +28,7 @@
   border: 1px solid white;
   border-radius: 2px;
   box-shadow: 5px 5px 5px black;
+  align-self: center;
 }
 body{
   background-image: url('background.jpeg');
@@ -31,4 +37,19 @@ body{
 }
 .game-screen canvas {
     margin: 0 auto;
+}
+#topScore{
+  float: left;
+  text-align: center;
+  font-family: font;
+  color: rgb(255, 0, 0);
+  text-shadow: 5px 5px 5px black;
+  border: 1px solid white;
+  background-color: black;
+}
+th{
+  border: 1px solid white;
+}
+td{
+  border: 1px solid white;
 }
