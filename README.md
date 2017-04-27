@@ -15,6 +15,7 @@ Chaque commit représente une version de l'application:
   -Commit 2 Ajout de fonction (Victoire,Defaite...)
   -Commit 3 Ajout de fonction (accélération de la balle,rebon dans les angles de la raquette...)
   -Commit 4 Ajout de fonction (Score) et correction de bugs
+  -Commit 5/6 Modification des images
   
 Mozilla FireFox: Le pseudo n'est pas réinitialisé.
 
