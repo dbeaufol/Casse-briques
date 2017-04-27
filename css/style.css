@@ -21,6 +21,7 @@
   font-family: font;
   color: rgb(255, 0, 0);
   text-shadow: 5px 5px 5px black;
+  margin: 10px;
 }
 #start{
   background-color: black;
@@ -52,4 +53,13 @@ th{
 }
 td{
   border: 1px solid white;
+}
+#pseudo{
+  /*display: none;
+  visibility: hidden;*/
+  align-self: center;
+}
+#Hpseudo{
+  /*display: none;
+  visibility: hidden;*/
 }
