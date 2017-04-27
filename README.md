@@ -17,4 +17,5 @@ Chaque commit représente une version de l'application:
   -Commit 4 Ajout de fonction (Score) et correction de bugs
   
 Mozilla FireFox: Le pseudo n'est pas réinitialisé.
+
 Google chrome: Le pseudo est réinitialiser a chaque actualisation de la page.
